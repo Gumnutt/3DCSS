@@ -1,0 +1,35 @@
+.pines{
+  bottom: 0;
+  width: 13vw;
+  height: 7.5vw;
+  transform: translateZ(1.51vw);
+  .pine{
+    bottom: 0;
+    width: 1.4vw;
+    height: 1.4vw;
+    transform: rotateZ(-10deg) scale(.7);
+  }
+  .pine-primary{
+    .pine-a{
+      width:100%;
+      height:100%;
+      transform: rotateZ(-50deg) scaleX(.8) scaleY(.8) scaleZ(.8);
+      &:nth-last-of-type(2){ transform: rotateZ(90deg);}
+      &:nth-last-of-type(3){ transform: rotateZ(180deg) translateY(-15px);}
+      &:nth-last-of-type(4){ transform: rotateZ(270deg);}
+      &:nth-last-of-type(2), &:nth-last-of-type(4){
+        .pine__front{
+          border-top: 2vw solid var(--pine3);
+        }
+      }
+      .pine__front{
+        border-top: 2.5vw solid var(--pine2);
+        border-left: .73vw solid transparent;
+        border-right: .73vw solid transparent;
+        border-bottom: .73vw solid transparent;
+        transform-origin: top left;
+        transform: rotateX(70deg);
+      }
+    }
+  }
+}

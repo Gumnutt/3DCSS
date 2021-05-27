@@ -1,0 +1,119 @@
+@mixin cube($width, $height, $depth) {
+  &__front{ @include cube-front($width, $height, $depth); }
+  &__back{ @include cube-back($width, $height, $depth); }
+  &__right{ @include cube-right($width, $height, $depth); }
+  &__left{ @include cube-left($width, $height, $depth); }
+  &__top{ @include cube-top($width, $height, $depth);}
+  &__bottom{ @include cube-bottom($width, $height, $depth); }
+}
+
+@mixin cube-front($width, $height, $depth) {
+  width: $width;
+  height: $height;
+  transform-origin: bottom left;
+  transform: rotateX(-90deg) translateZ(-($height - ($depth * 2)));
+}
+@mixin cube-back($width, $height, $depth) {
+  width: $width;
+  height: $height;
+  transform-origin: top left;
+  transform: rotateX(-90deg) rotateY(180deg) translateX(-$width)translateY(-$height);
+}
+@mixin cube-right($width, $height, $depth) {
+  width: $depth * 2;
+  height: $height;
+  transform-origin: top left;
+  transform: rotateY(90deg) rotateZ(-90deg) translateZ($width)translateX(-$depth * 2) translateY(-$height);
+}
+@mixin cube-left($width, $height, $depth) {
+  width: $depth * 2;
+  height: $height;
+  transform-origin: top left;
+  transform: rotateY(-90deg) rotateZ(90deg) translateY(-$height);
+}
+@mixin cube-top($width, $height, $depth) {
+  width: $width;
+  height: $depth * 2;
+  transform-origin: top left;
+  transform: translateZ($height);
+}
+@mixin cube-bottom($width, $height, $depth) {
+  width: $width;
+  height: $depth * 2;
+  transform-origin: top left;
+  transform: rotateY(180deg) translateX(-$width);
+}
+
+@mixin controller($width, $height, $pos1, $pos2){
+  display: flex;
+  justify-content: $pos1;
+  align-items: $pos2;
+  position: absolute;
+  width: $width;
+  height: $width;
+}
+
+@mixin triangle($size) {
+  // .side {
+  //   width: 0;
+  //   height: 0;
+  //   border-left: $size/2 solid transparent;
+  //   border-right: $size/2 solid transparent;
+  //   border-bottom: $size solid black;
+  //   transform-origin: 50% 0%;
+  //   transform: rotateX(300deg);
+  //   &:nth-child(1){
+  //     transform: rotateX(270deg);
+  //   }
+  // }
+
+}
+// @mixin triangle-front($size){
+//   .side{
+//     width: 0;
+//     height: 0;
+//     border-left: $size/2 solid transparent;
+//     border-right: $size/2 solid transparent;
+//     border-bottom: $size solid black;
+//     &.front{
+//       transform: rotateX(300deg);
+//     }
+//   }
+// }
+
+
+
+
+
+@mixin pyramid($size){
+  $half-base: ($size / 2);
+  $apothem: $half-base / cos(60deg);
+  $base-move: 0 - ($apothem - $half-base);
+  @debug $base-move;
+  &__left{
+    @include triangle($size, 90deg, -$size/2, $size/2);
+  }
+  &__right{
+    @include triangle($size, 270deg, -$size/2, -$size/2);
+  }
+  &__front{
+    @include triangle($size, 0deg, 0, 0);
+  }
+  &__back{
+    @include triangle($size, 180deg, $size, 0);
+  }
+
+}
+
+
+@mixin triangle($size, $rotation, $tz, $tx){
+  width: 0;
+  height: 0;
+  border-left: $size/2 solid transparent;
+  border-right: $size/2 solid transparent;
+  border-top: $size solid black;
+  transform-origin: top center;
+  transform: rotateX(90deg) rotateY($rotation);
+  //transform-origin: $size/2 $size 0;
+  //transform: rotateX(90deg) rotateY($rotation) translateZ($tz) translateX($tx);
+}
